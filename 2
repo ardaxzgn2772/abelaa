@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
+            color: white;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 87, 34, 0.6);
+            margin-bottom: 50px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .button {
+            padding: 30px 70px;
+            background: linear-gradient(135deg, #ff5722, #e64a19);
+            border: none;
+            border-radius: 80px;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            box-shadow: 0 12px 35px rgba(255, 87, 34, 0.8), 0 6px 35px rgba(255, 87, 34, 0.3);
+            transition: all 0.3s ease-in-out, transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 80px;
+            z-index: -1;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .button:hover::after {
+            transform: scale(1);
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #e64a19, #ff5722);
+            box-shadow: 0 18px 50px rgba(255, 87, 34, 0.9);
+            transform: translateY(-12px) rotate(5deg) scale(1.1);
+        }
+
+        .button:active {
+            transform: translateY(2px) scale(0.98);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: radial-gradient(circle, rgba(0, 198, 255, 1) 0%, rgba(0, 114, 255, 1) 100%);
+            color: white;
+            padding: 30px 60px;
+            border-radius: 15px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: none;
+            box-shadow: 0 20px 60px rgba(0, 198, 255, 0.6);
+            animation: popIn 1s ease-out forwards, fadeOut 5s ease-in-out 5s forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>認証へようこそ！</h1>
+    <button class="button" onclick="showNotification()">認証</button>
+    <div class="notification" id="notification">認証完了！</div>
+
+    <script>
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            
+            // 2秒後に「認証完了！」を非表示にして、次のページにリダイレクト
+            setTimeout(() => {
+                notification.style.display = 'none';
+                window.location.href = "success.html"; // 次のページに飛ぶ
+            }, 2000); // 2秒後にリダイレクト
+        }
+    </script>
+</body>
+</html>
